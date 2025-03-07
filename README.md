@@ -1,2 +1,2 @@
 # Zettelkasten
-In diesem Repository werden alle Dateien und Dokumente für die Abgabe des Projekts "Zettelkasten" gesichtert. Dies ist die Abgabe der Nachprüfung in Modul Fullstack Web Development im Wintersemester 24/25.
+All files and documents for the submission of the project ‘Zettelkasten’ are saved in this repository. This is the submission of the second examination in the module Fullstack Web Development in the winter semester 24/25.
