@@ -3,32 +3,20 @@ title: Home
 nav_order: 0
 ---
 
-{: .attention }
-> Any text enclosed by `[ ]` are placeholders, including the opening and closing brackets.
->
-> You may delete this `attention` box.
+# Zettelkasten
 
-# [Project Name]
-
-[Project description]
+The project contains the documentation and implementation of a digital "Zettelkasten". 
 
 ## Team members
 
-### [Jane Dane]
+### Neele-Sofie Kuhn
 
 About
-: Some info about Jane
+: I'm Neele Kuhn and I'm in my 8th semester studying Business Informatics at the HWR Berlin. My main interests are digitalisation, data and process analysis. 
 
 Matr.-Nr.
-: 1234567
+: 77211825446
 
-### [Joe Doe]
-
-About
-: Some info about Joe
-
-Matr.-Nr.
-: 1234567
 
 ## Eidesstattliche Erklärung
 
