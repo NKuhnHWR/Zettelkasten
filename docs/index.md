@@ -7,7 +7,7 @@ nav_order: 0
 
 The project contains the documentation and implementation of a digital "Zettelkasten". 
 
-## Team members
+## Team member
 
 ### Neele-Sofie Kuhn
 
