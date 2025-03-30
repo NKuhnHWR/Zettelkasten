@@ -16,27 +16,36 @@ nav_order: 3
 {: toc }
 </details>
 
-## 01: [Title]
+## 01: Setup of html files
 
 ### Meta
 
 Status
-: **Work in progress** - Decided - Obsolete
+: Work in progress - **Decided** - Obsolete
 
 Updated
-: DD-MMM-YYYY
+: 30-03-2025
 
 ### Problem statement
 
-[Describe the problem to be solved or the goal to be achieved. Include relevant context information.]
+The first problem addressed is how to design the html templates. There is to be discussed where the styling is made and if there is a cental file where all other files inherit from.
 
 ### Decision
 
-[Describe **which** design decision was taken for **what reason** and by **whom**.]
+I decided to create a style.css file and a base.html file in addition to the actual templates. This decision was made because it is on the long run the more effective way. By choosing this option I make sure that each page has the same basic structure. This is less work for maintaining when changing the structure. In addition it is more user friendly when every page has the same basic structure.
 
 ### Regarded options
 
-[Describe any possible design decision that will solve the problem. Assess these options, e.g., via a simple pro/con list.]
+I regarded two alternative options:
+
++ Setup page structure for each html file seperate
++ Creating a base template from wich the other files inherit
+
+| Criterion | No inheritance from base.html | Inheritance from base.html |
+| --- | --- | --- |
+| **Knowledge** | No extra knowlede about inheritance needed. | Requires knowledge about inheritance |
+| **Maintaining the structure** | Harder because each file has to be maintained for itself | Easier because all files inherit from base |
+| **User experience** | Just good when every html file has the same structure | Ensured by having the same structure by inheritance |
 
 ---
 
