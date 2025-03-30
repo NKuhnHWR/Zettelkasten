@@ -43,7 +43,38 @@ I regarded two alternative options:
 
 | Criterion | No inheritance from base.html | Inheritance from base.html |
 | --- | --- | --- |
-| **Knowledge** | No extra knowlede about inheritance needed. | Requires knowledge about inheritance |
+| **Knowledge** | No extra knowlede about inheritance needed | Requires knowledge about inheritance |
+| **Maintaining the structure** | Harder because each file has to be maintained for itself | Easier because all files inherit from base |
+| **User experience** | Just good when every html file has the same structure | Ensured by having the same structure by inheritance |
+
+## 02: Register and Login function
+
+### Meta
+
+Status
+: Work in progress - **Decided** - Obsolete
+
+Updated
+: 30-03-2025
+
+### Problem statement
+
+Should the Register and Login function be implemented in html or in python?
+
+### Decision
+
+I decided to use WTForms and implement the Register and Login function in Python.
+
+### Regarded options
+
+I regarded two alternative options:
+
++ Build a form in the according html file
++ Implement the function in Python using WTForms
+
+| Criterion | Implement in html | Implement using WTForms |
+| --- | --- | --- |
+| **Data validation** | Data validation is not automatically implemented | WTForms comes with data validation |
 | **Maintaining the structure** | Harder because each file has to be maintained for itself | Easier because all files inherit from base |
 | **User experience** | Just good when every html file has the same structure | Ensured by having the same structure by inheritance |
 
