@@ -5,6 +5,13 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from wtforms.validators import DataRequired, Length
 from flask_sqlalchemy import SQLAlchemy
+from bcrypt import hashpw, checkpw, gensalt
+
+def get_hashed_pw(plain_password):
+    return hashpw(plain_password.encode("utf-8"), gensalt())
+
+def check_password(plain_password, hashed_password):
+    return checkpw(plain_password.encode("utf-8"), hashed_password=hashed_password)
 
 db = SQLAlchemy()
 
@@ -54,7 +61,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user and user.password == form.password.data:
+        if user and check_password(form.password.data, user.password):
             login_user(user, remember=form.remember.data)
             flash("Der Login war erfolgreich!")
             return redirect(url_for("dashboard"))
@@ -66,7 +73,8 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data == form.passwordrepeated.data:
-            new_user = User(username = form.username.data, password = form.password.data)
+            hashed_password = get_hashed_pw(form.password.data)
+            new_user = User(username = form.username.data, password = hashed_password)
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for("dashboard"))
