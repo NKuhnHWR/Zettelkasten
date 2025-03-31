@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from wtforms.validators import DataRequired, Length
 from flask_sqlalchemy import SQLAlchemy
 
@@ -11,10 +12,17 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "secretkey"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///zettelkasten.db"
 bootstrap = Bootstrap5(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 db.init_app(app)
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__="users"
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String, unique = True, nullable = False)
@@ -26,6 +34,12 @@ class RegisterForm(FlaskForm):
     passwordrepeated = PasswordField("Passwort wiederholen", validators=[DataRequired(), Length(8,30)])
     submit = SubmitField()
 
+class LoginForm(FlaskForm):
+    username = StringField("Name", validators=[DataRequired(), Length(4,10)])
+    password = PasswordField("Passwort", validators=[DataRequired(), Length(8,30)])
+    remember = BooleanField("Logindaten merken?")
+    submit = SubmitField()
+
 with app.app_context():
     db.create_all()
 
@@ -33,9 +47,15 @@ with app.app_context():
 def index():
     return render_template("index.html")
 
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and user.password == form.password.data:
+            login_user(user, remember=form.remember.data)
+            return redirect(url_for("dashboard"))
+    return render_template("login.html", form=form)
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -48,8 +68,9 @@ def register():
     return render_template("register.html", form=form)
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", user=current_user.username)
 
 
 
