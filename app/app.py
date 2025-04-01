@@ -37,8 +37,8 @@ class User(db.Model, UserMixin):
 
 class Note(db.Model):
     __tablename__="notes"
-    id = db.Column(db.Integer, primary_key = True)
-    ownerID = db.Column(db.String, unique = True, nullable = False)
+    id = db.Column(db.Integer, unique = True, primary_key = True)
+    ownerID = db.Column(db.String, nullable = False)
     content = db.Column(db.String, nullable = False)
     source = db.Column(db.String)
     category = db.Column(db.String)
@@ -107,11 +107,11 @@ def dashboard():
 def note():
     form = NoteForm()
     if form.validate_on_submit():
-        new_note = Note(ownerID = current_user.id, content = form.content.data, source= form.content.data, category = form.category.data)
+        new_note = Note(ownerID = current_user.id, content = form.content.data, source= form.source.data, category = form.category.data).all()
         db.session.add(new_note)
         db.session.commit()
         return redirect(url_for("dashboard"))
-    return render_template("register.html", form=form)
+    return render_template("note.html", form=form)
     
 
 @app.route('/logout')
