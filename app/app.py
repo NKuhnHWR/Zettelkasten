@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from wtforms.validators import DataRequired, Length
 from flask_sqlalchemy import SQLAlchemy
@@ -35,6 +35,15 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String, unique = True, nullable = False)
     password = db.Column(db.String, nullable = False)
 
+class Note(db.Model):
+    __tablename__="notes"
+    id = db.Column(db.Integer, primary_key = True)
+    ownerID = db.Column(db.String, unique = True, nullable = False)
+    content = db.Column(db.String, nullable = False)
+    source = db.Column(db.String)
+    category = db.Column(db.String)
+
+
 class RegisterForm(FlaskForm):
     username = StringField("Name", validators=[DataRequired(), Length(4,10)])
     password = PasswordField("Passwort", validators=[DataRequired(), Length(8,30)])
@@ -45,6 +54,12 @@ class LoginForm(FlaskForm):
     username = StringField("Name", validators=[DataRequired(), Length(4,10)])
     password = PasswordField("Passwort", validators=[DataRequired(), Length(8,30)])
     remember = BooleanField("Logindaten merken?")
+    submit = SubmitField()
+
+class NoteForm(FlaskForm):
+    content = StringField("Notiz", validators=[DataRequired()])
+    source = StringField("Herkunft der Notiz (Quelle)")
+    category = StringField("Kategorie der Notiz")
     submit = SubmitField()
 
 with app.app_context():
@@ -86,6 +101,18 @@ def register():
 @login_required
 def dashboard():
     return render_template("dashboard.html", user=current_user.username)
+
+@app.route('/note', methods=["GET", "POST"])
+@login_required
+def note():
+    form = NoteForm()
+    if form.validate_on_submit():
+        new_note = Note(ownerID = current_user.id, content = form.content.data, source= form.content.data, category = form.category.data)
+        db.session.add(new_note)
+        db.session.commit()
+        return redirect(url_for("dashboard"))
+    return render_template("register.html", form=form)
+    
 
 @app.route('/logout')
 @login_required
