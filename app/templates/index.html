@@ -1,10 +1,37 @@
 {% extends "base.html" %}
 
+{% block navbar %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Zettelkasten</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{url_for('index')}}">Start</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('register')}}">Registrierung</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('login')}}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('dashboard')}}">Mein Zettelkasten</a>
+          </li>
+        </ul>
+       </div>
+     </div>
+  </nav>
+{% endblock navbar %}
+
 {% block content %}
     <h1>Willkommen in der Zettelkasten App!</h1>
 
 {% if user %}
-<h2>Eingeloggt als User: {{user}} </h2>
+<h2>Du bist bereits als {{user}} eingeloggt.</h2>
 <p>Möchtest du zu deinem Zettelkasten?</p>
 <a href="{{url_for('dashboard')}}">Dashboard</a>
 {% else %}

@@ -1,9 +1,17 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
 
 {% block content %}
 <h2>Registrierung</h2>
 {% if error %}
 {{error}}
 {% endif %}
+
+{% if user %}
+<h2>Du bist bereits als {{user}} eingeloggt.</h2>
+<p>Möchtest du zu deinem Zettelkasten?</p>
+<a href="{{url_for('dashboard')}}">Dashboard</a>
+{% else %}
 {{render_form(form)}}
+{% endif %}
+
 {% endblock content %}
