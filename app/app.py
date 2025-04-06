@@ -48,19 +48,19 @@ class RegisterForm(FlaskForm):
     username = StringField("Name", validators=[DataRequired(), Length(4,10)])
     password = PasswordField("Passwort", validators=[DataRequired(), Length(8,30)])
     passwordrepeated = PasswordField("Passwort wiederholen", validators=[DataRequired(), Length(8,30)])
-    submit = SubmitField()
+    submit = SubmitField(label="Registrierung abschließen")
 
 class LoginForm(FlaskForm):
     username = StringField("Name", validators=[DataRequired(), Length(4,10)])
     password = PasswordField("Passwort", validators=[DataRequired(), Length(8,30)])
     remember = BooleanField("Logindaten merken?")
-    submit = SubmitField()
+    submit = SubmitField(label="Login bestätigen")
 
 class NoteForm(FlaskForm):
     content = StringField("Notiz", validators=[DataRequired()])
     source = StringField("Herkunft der Notiz (Quelle)")
     category = StringField("Kategorie der Notiz")
-    submit = SubmitField()
+    submit = SubmitField(label="Notiz erstellen")
 
 with app.app_context():
     db.create_all()
