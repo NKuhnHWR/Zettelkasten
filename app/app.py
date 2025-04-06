@@ -74,27 +74,33 @@ def index():
 @app.route('/login', methods=["GET", "POST"])
 def login():
     form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user and check_password(form.password.data, user.password):
-            login_user(user, remember=form.remember.data)
-            flash("Der Login war erfolgreich!")
-            return redirect(url_for("dashboard"))
-        return render_template("login.html", form=form, error="Ungültige Logindaten!")
+    if current_user.is_active:
+        return render_template("login.html", user=current_user.username)
+    else:
+        if form.validate_on_submit():
+            user = User.query.filter_by(username=form.username.data).first()
+            if user and check_password(form.password.data, user.password):
+                login_user(user, remember=form.remember.data)
+                flash("Der Login war erfolgreich!")
+                return redirect(url_for("dashboard"))
+            return render_template("login.html", form=form, error="Ungültige Logindaten!")
     return render_template("login.html", form=form)
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
     form = RegisterForm()
-    if form.validate_on_submit():
-        if form.password.data == form.passwordrepeated.data:
-            hashed_password = get_hashed_pw(form.password.data)
-            new_user = User(username = form.username.data, password = hashed_password)
-            db.session.add(new_user)
-            db.session.commit()
-            return redirect(url_for("dashboard"))
-        else:
-          return render_template("register.html", form=form, error="Die Passwörter sind nicht identisch!")  
+    if current_user.is_active:
+        return render_template("register.html", user=current_user.username)
+    else:
+        if form.validate_on_submit():
+            if form.password.data == form.passwordrepeated.data:
+                hashed_password = get_hashed_pw(form.password.data)
+                new_user = User(username = form.username.data, password = hashed_password)
+                db.session.add(new_user)
+                db.session.commit()
+                return redirect(url_for("dashboard"))
+            else:
+                return render_template("register.html", form=form, error="Die Passwörter sind nicht identisch!")  
     return render_template("register.html", form=form)
 
 @app.route('/dashboard')
