@@ -2,9 +2,27 @@
 
 {% block content %}
 
-<h3>Du bist eigeloggt, {{user}}</h3>
+<h3>Du bist eingeloggt, {{user}}</h3>
+<p> Hier sind deine Notizen:</p>
 
-<p> {{get_flashed_messages()[0]}} </p>
+{% for note in my_notes %}
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <p class="card-text">{{note.content}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{note.source}}</li>
+    <li class="list-group-item">{{note.category}}</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Bearbeiten</a>
+    <a href="#" class="card-link">Löschen</a>
+  </div>
+</div>
+  
+{% endfor %}
+
 
 <a href="{{url_for('logout')}}">Logout</a>
 <a href="{{url_for('note')}}">Neue Notiz</a>

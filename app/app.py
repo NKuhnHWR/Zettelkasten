@@ -106,7 +106,13 @@ def register():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template("dashboard.html", user=current_user.username)
+    my_notes = []
+    my_notes = db.session.query(
+        Note.content,
+        Note.source,
+        Note.category
+    ).filter(Note.ownerID == current_user.id)
+    return render_template("dashboard.html", user=current_user.username, my_notes = my_notes)
 
 @app.route('/note', methods=["GET", "POST"])
 @login_required
