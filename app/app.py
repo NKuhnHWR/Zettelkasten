@@ -43,6 +43,11 @@ class Note(db.Model):
     source = db.Column(db.String)
     category = db.Column(db.String)
 
+class Category(db.Model):
+    __tablename__="categories"
+    id = db.Column(db.Integer, unique = True, primary_key = True)
+    ownerID = db.Column(db.String, nullable = False)
+    category_name = db.Column(db.String, nullable = False)
 
 class RegisterForm(FlaskForm):
     username = StringField("Name", validators=[DataRequired(), Length(4,10)])
@@ -61,6 +66,10 @@ class NoteForm(FlaskForm):
     source = StringField("Herkunft der Notiz (Quelle)")
     category = StringField("Kategorie der Notiz")
     submit = SubmitField(label="Notiz erstellen")
+
+class CategoryForm(FlaskForm):
+    category_name = StringField("Name der Kategorie")
+    submit = SubmitField(label="Kategorie anlegen")
 
 with app.app_context():
     db.create_all()
@@ -106,6 +115,11 @@ def register():
 @app.route('/dashboard')
 @login_required
 def dashboard():
+    form = CategoryForm()
+    my_categories= []
+    my_categories = db.session.query(
+        Category.category_name
+    ).filter(Category.ownerID == current_user.id)
     my_notes = []
     my_notes = db.session.query(
         Note.content,
