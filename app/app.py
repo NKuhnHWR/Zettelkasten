@@ -130,6 +130,7 @@ def dashboard():
         new_category = Category(ownerID = current_user.id, category_name = form.category_name.data)
         db.session.add(new_category)
         db.session.commit()
+        return redirect(url_for('dashboard'))
     return render_template("dashboard.html", user=current_user.username, my_notes = my_notes, my_categories= my_categories, form = form)
 
 @app.route('/note', methods=["GET", "POST"])
