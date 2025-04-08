@@ -112,7 +112,7 @@ def register():
                 return render_template("register.html", form=form, error="Die Passwörter sind nicht identisch!")  
     return render_template("register.html", form=form)
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=["GET", "POST"])
 @login_required
 def dashboard():
     form = CategoryForm()
@@ -126,7 +126,11 @@ def dashboard():
         Note.source,
         Note.category
     ).filter(Note.ownerID == current_user.id)
-    return render_template("dashboard.html", user=current_user.username, my_notes = my_notes)
+    if form.validate_on_submit():
+        new_category = Category(ownerID = current_user.id, category_name = form.category_name.data)
+        db.session.add(new_category)
+        db.session.commit()
+    return render_template("dashboard.html", user=current_user.username, my_notes = my_notes, my_categories= my_categories, form = form)
 
 @app.route('/note', methods=["GET", "POST"])
 @login_required
