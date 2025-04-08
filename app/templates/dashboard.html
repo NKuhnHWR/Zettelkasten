@@ -29,9 +29,9 @@
 <h3>Du bist eingeloggt, {{user}}</h3>
 <p> Hier sind deine Notizen:</p>
 
+<div class="card-columns" >
 {% for note in my_notes %}
-
-<div class="card" style="width: 18rem;">
+    <div class="card" style="width: 18rem;" >
   <div class="card-body">
     <p class="card-text">{{note.content}}</p>
   </div>
@@ -44,9 +44,8 @@
     <a href="#" class="card-link">Löschen</a>
   </div>
 </div>
-  
 {% endfor %}
-
+</div> 
 
 <a href="{{url_for('logout')}}">Logout</a>
 <a href="{{url_for('note')}}">Neue Notiz</a>
