@@ -1,41 +1,41 @@
 {% extends "dashboard.html" %}
 
 {% block content %}
-
-<aside class="sidebar">
-  <ul class="list-unstyled px-2">
-    <li id="dashboard" class="active">
-      <a href="{{url_for('dashboard')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Alle Notizen</a>
-    </li>
-    {% for category in my_categories %}
-      <li id="projects">
-        <a href="{{url_for('filtered_dashboard', id=category.id)}}"> {{category.category_name}} </a>
+<div class="content">
+  <aside class="sidebar">
+    <ul class="list-unstyled px-2">
+      <li id="dashboard" class="active">
+        <a href="{{url_for('dashboard')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Alle Notizen</a>
       </li>
-    {% endfor %}
-  </ul>
-</aside>
-<main>
-  <div>
-    <h3>Du bist eingeloggt, {{user}}</h3>
-  </div>
-  <p> Hier sind deine Notizen:</p>
-  <div class="card-columns"  >
-    {% for note in my_notes %}
-      <div class="card" style="width: 18rem;" >
-        <div class="card-body">
-          <p class="card-text">{{note.content}}</p>
+      {% for category in my_categories %}
+        <li id="projects">
+          <a href="{{url_for('filtered_dashboard', id=category.id)}}"class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> {{category.category_name}} </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+  <main class="main">
+    <div>
+      <h3>Du bist eingeloggt, {{user}}</h3>
+    </div>
+    <p> Hier sind deine Notizen:</p>
+    <div class="card-columns"  >
+      {% for note in my_notes %}
+        <div class="card" style="width: 18rem;" >
+          <div class="card-body">
+            <p class="card-text">{{note.content}}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{note.source}}</li>
+            <li class="list-group-item">{{note.category_name}}</li>
+          </ul>
+          <div class="card-body">
+            <a href="{{url_for('change_note', id=note.id)}}" class="card-link">Bearbeiten</a>
+            <a href="#" class="card-link">Löschen</a>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{note.source}}</li>
-          <li class="list-group-item">{{note.category_name}}</li>
-        </ul>
-        <div class="card-body">
-          <a href="{{url_for('change_note', id=note.id)}}" class="card-link">Bearbeiten</a>
-          <a href="#" class="card-link">Löschen</a>
-        </div>
-      </div>
-    {% endfor %}
-  </div> 
-</main>
-
+      {% endfor %}
+    </div> 
+  </main>
+</div>
 {% endblock content %}

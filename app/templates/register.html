@@ -1,6 +1,7 @@
 {% extends "index.html" %}
 
 {% block content %}
+<main class="full_width">
 <h2>Registrierung</h2>
 {% if error %}
 {{error}}
@@ -13,5 +14,5 @@
 {% else %}
 {{render_form(form)}}
 {% endif %}
-
+</main>
 {% endblock content %}
