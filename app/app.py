@@ -47,7 +47,7 @@ class Category(db.Model):
     __tablename__="categories"
     id = db.Column(db.Integer, unique = True, primary_key = True)
     ownerID = db.Column(db.String, nullable = False)
-    category_name = db.Column(db.String, nullable = False)
+    category_name = db.Column(db.String, nullable = True)
 
 class RegisterForm(FlaskForm):
     username = StringField("Name", validators=[DataRequired(), Length(4,10)])
@@ -64,7 +64,7 @@ class LoginForm(FlaskForm):
 class NoteForm(FlaskForm):
     content = StringField("Notiz", validators=[DataRequired()])
     source = StringField("Herkunft der Notiz (Quelle)")
-    category = StringField("Kategorie der Notiz")
+    category = SelectField("Kategorie der Notiz", coerce=int)
     submit = SubmitField(label="Notiz erstellen")
 
 class CategoryForm(FlaskForm):
@@ -124,8 +124,9 @@ def dashboard():
     my_notes = db.session.query(
         Note.content,
         Note.source,
-        Note.category
-    ).filter(Note.ownerID == current_user.id)
+        Category.category_name
+    ).join(Category, Note.category == Category.id) \
+    .filter(Note.ownerID == current_user.id)
     if form.validate_on_submit():
         new_category = Category(ownerID = current_user.id, category_name = form.category_name.data)
         db.session.add(new_category)
@@ -136,9 +137,12 @@ def dashboard():
 @app.route('/note', methods=["GET", "POST"])
 @login_required
 def note():
+    available_categories = db.session.query(Category).filter(Category.ownerID == current_user.id)
+    categories_list = [(i.id, i.category_name) for i in available_categories]
     form = NoteForm()
+    form.category.choices = categories_list
     if form.validate_on_submit():
-        new_note = Note(ownerID = current_user.id, content = form.content.data, source= form.source.data, category = form.category.data).all()
+        new_note = Note(ownerID = current_user.id, content = form.content.data, source= form.source.data, category = form.category.data)
         db.session.add(new_note)
         db.session.commit()
         return redirect(url_for("dashboard"))
