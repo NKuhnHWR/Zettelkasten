@@ -171,8 +171,14 @@ def filtered_dashboard(id):
     .filter(Note.ownerID == current_user.id) \
     .filter(Note.category == id)
     return render_template("filtered_dashboard.html", user=current_user.username, my_notes = my_notes, my_categories= my_categories, category = Category.category_name)
-    
 
+@app.route('/delete_note/<int:id>', methods=["GET", "POST"]) 
+@login_required
+def delete_note(id):
+    object = db.session.get(Note, id)
+    db.session.delete(object)
+    db.session.commit()
+    return redirect(url_for("dashboard"))
 @app.route('/logout')
 @login_required
 def logout():

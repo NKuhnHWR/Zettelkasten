@@ -46,7 +46,7 @@
           </ul>
           <div class="card-body">
             <a href="{{url_for('change_note', id=note.id)}}" class="card-link">Bearbeiten</a>
-            <a href="#" class="card-link">Löschen</a>
+            <a href="{{url_for('delete_note', id=note.id)}}" class="card-link">Löschen</a>
           </div>
         </div>
       {% endfor %}
