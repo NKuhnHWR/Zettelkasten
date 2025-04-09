@@ -118,7 +118,8 @@ def dashboard():
     form = CategoryForm()
     my_categories= []
     my_categories = db.session.query(
-        Category.category_name
+        Category.category_name,
+        Category.id
     ).filter(Category.ownerID == current_user.id)
     my_notes = []
     my_notes = db.session.query(
@@ -147,6 +148,29 @@ def note():
         db.session.commit()
         return redirect(url_for("dashboard"))
     return render_template("note.html", form=form)
+
+@app.route('/filtered_dashboard/<int:id>', methods=["GET", "POST"])
+@login_required
+def filtered_dashboard(id):
+    category = db.session.query(
+        Category.category_name, 
+        Category.id
+    ).filter(Category.id == id))
+    my_categories= []
+    my_categories = db.session.query(
+        Category.category_name, 
+        Category.id
+    ).filter(Category.ownerID == current_user.id)
+    my_notes = []
+    my_notes = db.session.query(
+        Note.content,
+        Note.source,
+        Note.id,
+        Category.category_name
+    ).join(Category, Note.category == Category.id) \
+    .filter(Note.ownerID == current_user.id) \
+    .filter(Note.category == id)
+    return render_template("filtered_dashboard.html", user=current_user.username, my_notes = my_notes, my_categories= my_categories, category = Category.category_name)
     
 
 @app.route('/logout')

@@ -31,11 +31,11 @@
 <aside class="sidebar">
   <ul class="list-unstyled px-2">
     <li id="dashboard" class="active">
-      <a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Alle Notizen</a>
+      <a href="{{url_for('dashboard')}}" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Alle Notizen</a>
     </li>
     {% for category in my_categories %}
       <li id="projects">
-        <a href="#"> {{category.category_name}} </a>
+        <a href="{{url_for('filtered_dashboard', id=category.id)}}"> {{category.category_name}} </a>
       </li>
     {% endfor %}
   </ul>
