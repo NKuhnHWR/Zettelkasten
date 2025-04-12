@@ -52,7 +52,7 @@ Beside this there is a template folder which includes:
 + dashboard
 + filtered_dashboard
 + note
-The inheritance structure of these html files is visualized in this overview ([it is also accessible through this Miro-Link](https://miro.com/app/board/uXjVIOX94I4=/)): ![Inheritance structure](assets/images/inheritance.png):
+The inheritance structure of these html files is visualized in this overview ([it is also accessible through this Miro-Link](https://miro.com/app/board/uXjVIOX94I4=/)): ![Inheritance structure](assets/images/Inheritance.png)
 
 
 There is also a static folder including the style.css file. It includes styling for the following components:
