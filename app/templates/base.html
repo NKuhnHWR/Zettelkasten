@@ -10,6 +10,7 @@
       <link rel="stylesheet" href={{url_for("static", filename="style.css")}}>
       <title>Zettelkasten</title>
   </head>
+  <!-- holy_grail sets the column oriented flexbox for all components inside it-->
   <body class="holy_grail">
 
     {% block navbar %}
@@ -20,12 +21,13 @@
 
     {% endblock content %}
 
+<!-- Sets the footer including links to repo and documentation for all pages -->
     {% block footer %}
     <footer class="footer">
       <a href="https://github.com/NKuhnHWR/Zettelkasten">Zum GitHub-Repository</a><br>
       <a href="https://nkuhnhwr.github.io/Zettelkasten/">Zur Dokumentation</a>
     </footer>
     {% endblock footer %}
-
+ 
   </body>
 </html>

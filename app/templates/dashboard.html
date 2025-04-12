@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+<!-- navbar includes the navbar for all pages that can only be accessed with an account-->
 {% block navbar %}
 <nav class="header">
   <a class="navbar-brand" href="#">Zettelkasten</a>
@@ -19,6 +20,7 @@
         <a href="{{url_for('dashboard')}}"class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i>Alle Notizen
         </a>
       </li>
+      <!-- The following loop iterates through th users categories to create a dynamic sidebar -->
       {% for category in my_categories %}
       <li>
         <a href="{{url_for('filtered_dashboard', id=category.id)}}"class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> 
@@ -35,6 +37,7 @@
     <h3>Du bist eingeloggt, {{user}}</h3>
     <p> Hier sind deine Notizen:</p>
     <div class="card-columns"  >
+      <!-- The following loop iterates through this users notes and prints them in Bootstraps card-layout-->
       {% for note in my_notes %}
         <div class="card" style="width: 18rem;" >
           <div class="card-body">

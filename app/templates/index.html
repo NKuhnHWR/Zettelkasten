@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+<!-- This navbar includes the navbar for all pages that can be accessed without an account-->
 {% block navbar %}
   <nav class="header">
     <a class="navbar-brand">Zettelkasten</a>
@@ -13,6 +14,7 @@
   </nav>
 {% endblock navbar %}
 
+<!-- In this block is a condition, showing either the link to the dashboard or the login and register, depending if the user is logged in--->
 {% block content %}
 <main class="full_width">
   <h1>Willkommen in der Zettelkasten App!</h1>
