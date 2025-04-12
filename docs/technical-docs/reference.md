@@ -4,18 +4,9 @@ parent: Technical Docs
 nav_order: 3
 ---
 
-{: .label }
-[Jane Dane]
 
 {: .no_toc }
 # Reference documentation
-
-{: .attention }
-> This page collects internal functions, routes with their functions, and APIs (if any).
-> 
-> See [Uber](https://developer.uber.com/docs/drivers/references/api) or [PayPal](https://developer.paypal.com/api/rest/) for exemplary high-quality API reference documentation.
->
-> You may delete this `attention` box.
 
 <details open markdown="block">
 {: .text-delta }
@@ -24,62 +15,123 @@ nav_order: 3
 {: toc }
 </details>
 
-## [Section / module]
+## Login
 
-### `function_definition()`
+### login()
 
-**Route:** `/route/`
+**Route:** '/login'
 
-**Methods:** `POST` `GET` `PATCH` `PUT` `DELETE`
+**Methods:** `POST` `GET` 
 
-**Purpose:** [Short explanation of what the function does and why]
+**Purpose:** Login the user and redirect to the dashboard if login is successful.
 
 **Sample output:**
 
-[Show an image, string output, or similar illustration -- or write NONE if function generates no output]
+Redirection to dashboard or show Error if Login was not successful.
 
 ---
 
-## [Example, delete this section] Show to-do lists
+## Dashboard
 
-### `get_lists()`
+### dashboard()
 
-**Route:** `/lists/`
+**Route:** '/dashboard'
 
-**Methods:** `GET`
+**Methods:** `POST` `GET` 
 
-**Purpose:** Show all to-do lists.
+**Purpose:** Show all Notes from the user and show all categories in a sidebar.
 
 **Sample output:**
 
-![get_lists() sample](../assets/images/fswd-intro_00.png)
+![Alle Notizen](assets/images/AlleNotizen.png)
+
+---
+## Register
+
+### register()
+
+**Route:** '/register'
+
+**Methods:** `POST` `GET` 
+
+**Purpose:** Register the user and redirect to the Login if registration is successful.
+
+**Sample output:**
+
+Redirection to login or show Error if Registration was not successful.
+
 
 ---
 
-### `get_list_todos(list_id)`
+## Dashboard
 
-**Route:** `/lists/<int:list_id>`
+### dashboard()
 
-**Methods:** `GET`
+**Route:** '/dashboard'
 
-**Purpose:** Retrieve all to-do items of to-do list with ID `list_id` from database and present to user.
+**Methods:** `POST` `GET` 
+
+**Purpose:** Show all Notes from the user and show all categories in a sidebar.
 
 **Sample output:**
 
-![get_list_todos() sample](../assets/images/fswd-intro_02.png)
+![Alle Notizen](assets/images/AlleNotizen.png)
 
 ---
 
-## [Example, delete this section] Insert sample data
+## Note
+### note()
 
-### `run_insert_sample()`
+**Route:** '/note'
 
-**Route:** `/insert/sample`
+**Methods:** `POST` `GET` 
 
-**Methods:** `GET`
-
-**Purpose:** Flush the database and insert sample data set
+**Purpose:** Show form to create a new note and save the new note. 
 
 **Sample output:**
 
-Browser shows: `Database flushed and populated with some sample data.`
+![Notiz erstellen](assets/images/NotizErstellen.png)
+
+---
+
+## Change note
+### change_note(id)
+
+**Route:** '/change_note/<int:id>'
+
+**Methods:** `POST` `GET` 
+
+**Purpose:** Show form to change a note with prefilled fields. 
+
+**Sample output:**
+
+![Notiz bearbeiten](assets/images/NotizBearbeiten.png)
+
+---
+
+## Filter dashboard
+### filtered_dashboard(id)
+
+**Route:** '/filtered_dashboard/<int:id>'
+
+**Methods:** `POST` `GET` 
+
+**Purpose:** Show all Notes from the chosen category and show all categories in a sidebar.
+
+**Sample output:**
+
+![Gefiltertes Dashboard](assets/images/GefilterteNotiz.png)
+
+---
+
+## Delete Note
+### delete_note(id)
+
+**Route:** '/delete_note/<int:id>'
+
+**Methods:** `POST` `GET` 
+
+**Purpose:** Deleting the chosen note.
+**Sample output:**
+
+Dashboard without the deleted note.
