@@ -38,4 +38,4 @@ In general the method and application can be used in every context where notes a
 
 ## Customer journey
 
-The customer journey starts with the greeting and the option to login or register. Once logged in, the user can navigate through the notes of the different categories or take new notes. The navigation bar on top makes it possible to switch from every screen to every other screen. In the picture below you can find the user flow ([it is also accessible through this Miro-Link](https://miro.com/app/board/uXjVIOX94I4=/)): ![Customer journey](docs/assets/images/JourneyZettelkasten.jpg) 
+The customer journey starts with the greeting and the option to login or register. Once logged in, the user can navigate through the notes of the different categories or take new notes. The navigation bar on top makes it possible to switch from every screen to every other screen. In the picture below you can find the user flow ([it is also accessible through this Miro-Link](https://miro.com/app/board/uXjVIOX94I4=/)): ![Customer journey](assets/images/JourneyZettelkasten.jpg) 
