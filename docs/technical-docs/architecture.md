@@ -67,4 +67,4 @@ There is also a static folder including the style.css file. It includes styling 
   
 ## Cross-cutting concerns
 
-[Describe anything that is important for a solid understanding of your codebase. Most likely, you want to explain the behavior of (parts of) your application. In this section, you may also link to important [design decisions](../design-decisions.md).]
+Important for understanding the code is the differentiation of what technologies are used for what function. In general there is only hardcoded Text and layout of the page written in html. Most of the content is dynamic and therefore rendered WTForms or Bootstrap elements with content from the Database. I tried to have as little redundancies as possible in the code so I worked with inheritance instead of overloaded html files. I also tried to reduce the amount of html files by using one file with more options for the content block instead of one file for each option. The database is also rather modular so that the amount of data is reduced and the content comes from the connection of the tables. (What also led to problems because for me it was hard to find a solution sometimes.)
