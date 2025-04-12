@@ -20,15 +20,15 @@ nav_order: 1
 
 When working in scientific context there are many information in different sources. In addition there are also personal thoughts and ideas about the content a person is reading. For writing scientific papers it is important to have a system for sorting and clustering the notes. 
 
-## Our solution
+## The solution
 
-This application provides the technical base for taking notes, qualifying them and creating clusters of notes for the same topic. 
-There are .. main functions:
- Taking notes
- Connecting notes to bibliographic information
- Adding tags to notes
- Connecting notes to related notes
- Deleting notes that are unnecessary
+This application provides the technical base for taking notes and notes of the same category. 
+There are 5 main functions:
+ + Creating a user account
+ + Taking notes including content, source and category
+ + Creating new categories
+ + Filtering the notes according to categories
+ + Deleting notes that are unnecessary
  
 
 ## Target user
@@ -38,4 +38,4 @@ In general the method and application can be used in every context where notes a
 
 ## Customer journey
 
-[Illustrate the customer journey, from the app's entry point to a completed task. You might want to show the customer journey as (schematic) screen flows.]
+The customer journey starts with the greeting and the option to login or register. Once logged in, the user can navigate through the notes of the different categories or take new notes. The navigation bar on top makes it possible to switch from every screen to every other screen. In the picture below you can find the user flow ([it is also accessible through this Miro-Link](https://miro.com/app/board/uXjVIOX94I4=/)): ![Customer journey](docs/assets/images/JourneyZettelkasten.jpg) 
