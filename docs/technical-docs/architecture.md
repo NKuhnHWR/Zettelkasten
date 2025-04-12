@@ -58,7 +58,7 @@ The inheritance structure of these html files is visualized in this overview ([i
 
 There is also a static folder including the style.css file. It includes styling for the following components:
 + holy grail: this component is needed to set the layout for all other containers as header, footer or content (it orders them as columns instead of rows)
-+ header and footer contain the styling of the navigation bar (header) and the footer
++ header and footer: contain the styling of the navigation bar (header) and the footer
 + content: sets the directions of containers that are stored inside an a 'content' container as rows; this is how sidebar and main are layouted vertical 
 + full-width: styles the content that has no sidebar (Login, Register, Note)
 + main: styles all relevant content that is shown on pages with a sidebar

@@ -19,4 +19,4 @@ nav_order: 2
 
 [Visualize and describe the data model(s) of your application. This description should match the actual implementation.]
 The applications data model contains three entities. These are users, notes and categories. Users contains an individual ID and the users name. Notes contains an individual ID for each note, owner, content, type, source and category. Categories contains an individual ID, owner and title. 
-Every user can have one to multiple notes and categories. Every note is owned by one user and is assigned to exact one category. Every category is owned by one user and can contain zero to many notes. Here is a model of the database:([it is also accessible through this Miro-Link](https://miro.com/app/board/uXjVIOX94I4=/)): ![Data model](assets/images/Datamodel.png)
+Every user can have one to multiple notes and categories. Every note is owned by one user and is assigned to exact one category. Every category is owned by one user and can contain zero to many notes. Here is a model of the database ([it is also accessible through this Miro-Link](https://miro.com/app/board/uXjVIOX94I4=/)): ![Data model](assets/images/Datamodel.png)

@@ -24,7 +24,6 @@
         display: inline-block;
         align-items:baseline;
         padding-inline: 3em;
-        text
     }
 }
 
@@ -33,7 +32,7 @@
     padding: 2em;
     text-align: center;
     height: 100px;
-    a{
+    a {
         color: rgb(213, 213, 213);
     }
     a:hover{
@@ -55,7 +54,7 @@
 
 .sidebar {
     flex: 1;
-    padding: 10px;
+    padding: 20px;
     background-color: rgb(122, 122, 122);
     width: 20vw;
     a {
@@ -66,17 +65,9 @@
 .main {
     flex: 2;
     background-color: rgb(183, 183, 183);
-    padding: 10px;
+    padding:30px;
     width: 80vw;
 }
-
-.card-columns {
-    columns:auto ;
-    width: 80%;
-    margin: 5%;
-    display: inline-block;
-    -webkit-column-break-inside: avoid ;
-  }
 
 .card{
     display: flexbox;
